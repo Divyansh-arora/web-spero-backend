@@ -7,11 +7,9 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   latitude: { type: Number },
   mobile: { type: Number, required: true },
-  zipCode: { type: Number, required: true },
-  // profilePic: { type: String },
-  // lang: { type: String },
+  zipCode: { type: Number, required: true }
 });
 userSchema.pre("save", async function () {
-  this.password = await bcrypt.hash(this.password, 10);
+  this.password = await bcrypt.hash(this.password, 10); // salt factor of 10  hashing algo
 });
 module.exports = mongoose.model("User", userSchema);
